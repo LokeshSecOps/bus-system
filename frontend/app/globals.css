@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  /* Color tokens — route/transit identity */
+  --color-navy: #1B2A4A;
+  --color-navy-deep: #121D33;
+  --color-amber: #F2A93B;
+  --color-amber-soft: #FCE3B4;
+  --color-paper: #FAF8F4;
+  --color-slate: #5B6478;
+  --color-slate-light: #9BA2B4;
+  --color-success: #2F9E5B;
+  --color-danger: #D65A4A;
+  --color-line: #E4E0D6;
+
+  --background: var(--color-paper);
+  --foreground: var(--color-navy);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* Geometric, slightly mechanical sans for headings — close in spirit to
+     Space Grotesk without depending on a Google Fonts network fetch. */
+  --font-display: "Avenir Next", "Century Gothic", "Futura", -apple-system,
+    "Segoe UI", system-ui, sans-serif;
+  /* Humanist sans for body copy, optimized for dense schedule data. */
+  --font-sans: -apple-system, "Segoe UI", "Inter", "Helvetica Neue", Arial,
+    system-ui, sans-serif;
+  /* Monospace for times and fares, like a digital departure board. */
+  --font-mono: "SF Mono", "JetBrains Mono", "Roboto Mono", "Consolas",
+    "Courier New", monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Route strip — signature element: a dotted line connecting two stops,
+   used on cards and the bus detail page to represent a journey at a glance. */
+.route-strip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+}
+
+.route-strip .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-navy);
+  flex-shrink: 0;
+}
+
+.route-strip .dot.amber {
+  background: var(--color-amber);
+}
+
+.route-strip .line {
+  flex: 1;
+  height: 2px;
+  background-image: linear-gradient(to right, var(--color-slate-light) 50%, transparent 50%);
+  background-size: 8px 2px;
+  margin: 0 4px;
+}
+
+/* Leaflet map container needs explicit height or it collapses to 0 */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  z-index: 0;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.4s ease-out both;
+}
